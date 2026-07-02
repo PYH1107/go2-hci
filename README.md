@@ -1,16 +1,18 @@
-# go2-hci
-NJU-2026 机器狗（语音部分）
-
----
-# Go2 語音控制 - 快速開始ㄊ
+# Go2 語音控制 - 快速開始
 
 ## 系統概述
+
+**Input**: 你的聲音 → **Output**: Go2 執行動作
 
 ```
 聲音 → Whisper → 文本 → 意圖解析 → SDK/Nav2 → 動作
 ```
- Input/Output 流程：
-  聲音 → 音頻 chunks → 文本 → action_id → 機器狗動作 → 語音回饋
+
+## ref.
+	- [[Unitree Go2] Access to Speaker and Microphone](https://forum.mybotshop.de/t/unitree-go2-access-to-speaker-and-microphone/1036)
+	- [Go2 机器狗实验指导书：第 16 章 语音交互系统](https://ztl3106742440-hub.github.io/go2-tutorial/05-interaction/16-voice/)
+	- [ROS2理论与实践_宇树机器人Go2开发指南](https://www.bilibili.com/video/BV1vv5YzBEQH?spm_id_from=333.788.videopod.episodes&vd_source=cb1e076f51948a7c55b8e7d36bc8063d)
+
 
 ---
 
@@ -190,7 +192,7 @@ ros2 topic echo /goal_pose
 # 網卡介面（默認 enp3s0）
 export GO2_NET_IFACE="enp3s0"
 
-# Whisper 模型（默認 smallㄊ）
+# Whisper 模型（默認 small）
 export GO2_WHISPER_MODEL="small"
 ```
 ---

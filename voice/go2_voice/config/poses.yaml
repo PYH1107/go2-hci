@@ -1,0 +1,62 @@
+# Go2 語音導航 - 導覽點姿態定義
+#
+# 格式說明：
+# - 每個導覽點包含：
+#   - frame: 參考坐標系 (通常為 "map")
+#   - position: {x, y, z} 位置坐標 (公尺)
+#   - orientation: {x, y, z, w} 四元數方向
+# - 坐標系原點和比例需與實際地圖一致
+#
+# 對應關係：
+# nav_history_museum      -> 院史館
+# nav_archive_room         -> 資料室
+# nav_school_of_classified -> 國家保密學院
+# nav_hci_lab              -> 人機交互實驗室
+
+nav_history_museum:
+  frame: "map"
+  position:
+    x: 5.2
+    y: 3.1
+    z: 0.0
+  orientation:
+    x: 0.0
+    y: 0.0
+    z: 0.707
+    w: 0.707
+
+nav_archive_room:
+  frame: "map"
+  position:
+    x: -2.1
+    y: 1.5
+    z: 0.0
+  orientation:
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 0.0
+
+nav_school_of_classified:
+  frame: "map"
+  position:
+    x: 0.0
+    y: 8.5
+    z: 0.0
+  orientation:
+    x: 0.0
+    y: 0.0
+    z: -0.707
+    w: 0.707
+
+nav_hci_lab:
+  frame: "map"
+  position:
+    x: -4.3
+    y: -2.0
+    z: 0.0
+  orientation:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0

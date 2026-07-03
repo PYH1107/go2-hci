@@ -9,35 +9,17 @@
 ```
 
 ## ref.
-	- [[Unitree Go2] Access to Speaker and Microphone](https://forum.mybotshop.de/t/unitree-go2-access-to-speaker-and-microphone/1036)
-	- [Go2 机器狗实验指导书：第 16 章 语音交互系统](https://ztl3106742440-hub.github.io/go2-tutorial/05-interaction/16-voice/)
-	- [ROS2理论与实践_宇树机器人Go2开发指南](https://www.bilibili.com/video/BV1vv5YzBEQH?spm_id_from=333.788.videopod.episodes&vd_source=cb1e076f51948a7c55b8e7d36bc8063d)
+- [[Unitree Go2] Access to Speaker and Microphone](https://forum.mybotshop.de/t/unitree-go2-access-to-speaker-and-microphone/1036)
+- [Go2 机器狗实验指导书：第 16 章 语音交互系统](https://ztl3106742440-hub.github.io/go2-tutorial/05-interaction/16-voice/)
+- [ROS2理论与实践_宇树机器人Go2开发指南](https://www.bilibili.com/video/BV1vv5YzBEQH?spm_id_from=333.788.videopod.episodes&vd_source=cb1e076f51948a7c55b8e7d36bc8063d)
 
 
 ---
 
 ## 語音指令列表
 
-### 喚醒詞
-說「小白」進入待命狀態
 
 ### 原地動作（SDK 直接控制）
-| 指令 | 動作 |
-|------|------|
-| 坐下 / 蹲下 | 趴下 |
-| 站起 / 起來 | 站起來 |
-| 前進 / 向前 | 前進 ~1.7 秒 |
-| 後退 / 往後 | 後退 ~1.7 秒 |
-| 左轉 / 向左 | 左轉 ~180° |
-| 右轉 / 向右 | 右轉 ~180° |
-| 打招呼 / 你好 | 打招呼 |
-| 伸懶腰 / 伸展 | 伸懶腰 |
-| 轉圈 / 轉一圈 | 原地轉圈 |
-| 跳舞 | 跳舞 |
-| 比心 | 比心 |
-| 後空翻 | 後空翻（需二次確認） |
-| 前空翻 | 前空翻（需二次確認） |
-| 恢復 / 復位 | 恢復站立 |
 
 ### 導覽點（Nav2）
 | 指令 | action_id |
@@ -222,8 +204,5 @@ go2-hci/                          # colcon workspace 根目錄
 │       ├── package.xml
 │       ├── setup.py
 │       └── setup.cfg
-├── README.md
-└── AGENTS.md                     # 個人 agent 指示（不入 git）
+└── README.md
 ```
-
-> `build/`、`install/`、`log/` 由 `colcon build` 自動生成，不入版控。

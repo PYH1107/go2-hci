@@ -13,7 +13,7 @@
 - [Go2 机器狗实验指导书：第 16 章 语音交互系统](https://ztl3106742440-hub.github.io/go2-tutorial/05-interaction/16-voice/)
 - [ROS2理论与实践_宇树机器人Go2开发指南](https://www.bilibili.com/video/BV1vv5YzBEQH?spm_id_from=333.788.videopod.episodes&vd_source=cb1e076f51948a7c55b8e7d36bc8063d)
 
-> [!NOTE]
+> [!warn]
 > 上述资料表示 go2 不支持语音 topic，而得采用外接的麦克风设备
 
 ---

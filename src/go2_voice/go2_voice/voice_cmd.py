@@ -15,6 +15,7 @@ from pathlib import Path
 
 import numpy as np
 import yaml
+from ament_index_python.packages import get_package_share_directory
 from faster_whisper import WhisperModel
 
 SAMPLE_RATE = 16000
@@ -33,34 +34,9 @@ NETWORK_INTERFACE = os.getenv("GO2_NET_IFACE", "enp3s0")
 MODEL_PATH = os.getenv("GO2_WHISPER_MODEL", "small")
 WAKE_WORDS = ["小白"]
 
-AUDIO_DIR = Path(__file__).resolve().parents[1] / "audio"
-
-# 嘗試從多個位置尋找 config 目錄
-# 1. 開發環境：相對於模組的 src/voice/go2_voice/config/
-# 2. 安裝環境：install/.../share/go2_voice/config/
-def _find_config_dir() -> Path:
-    """尋找 config 目錄，支援開發和安裝環境。"""
-    # 嘗試相對於模組的路徑（開發環境）
-    module_dir = Path(__file__).resolve().parents[1]
-    relative_config = module_dir / "config"
-    if relative_config.exists():
-        return relative_config
-
-    # 嘗試從 ament share 路徑（安裝環境）
-    try:
-        import ament_index_python
-        share_path = Path(ament_index_python.get_package_share_directory('go2_voice'))
-        share_config = share_path / "config"
-        if share_config.exists():
-            return share_config
-    except Exception:
-        pass
-
-    # 回退到相對路徑（可能不存在）
-    return relative_config
-
-CONFIG_DIR = _find_config_dir()
-POSES_FILE = CONFIG_DIR / "poses.yaml"
+PACKAGE_SHARE = Path(get_package_share_directory("go2_voice"))
+AUDIO_DIR = PACKAGE_SHARE / "audio"
+POSES_FILE = PACKAGE_SHARE / "config" / "poses.yaml"
 audio_queue: "queue.Queue[np.ndarray]" = queue.Queue()
 
 _parecord_proc = None

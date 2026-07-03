@@ -1,10 +1,16 @@
-base/
-voice/install/
-voice/log/
+# colcon build artifacts
+build/
+install/
+log/
 
+# Python
+__pycache__/
+*.pyc
+
+# Personal
 AGENTS.md
-
-voice/go2_voice/go2_voice/__pycache__
-
-voice/go2_voice/test
-voice/build
+src/go2_description
+src/go2_driver_py
+src/go2_sensors
+src/go2_teleop_ctrl_keyboard
+src/go2_twist_bridge_py

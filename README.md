@@ -169,8 +169,14 @@ sudo apt install ros-humble-nav2-msgs
 ### 編譯
 
 ```bash
-cd ~/unitree_go2_ws
+cd ~/go2-hci
+
+# 只編譯語音包（最快）
 colcon build --packages-select go2_voice
+
+# 或一次編譯全部（含 base 驅動、橋接等 6 個套件）
+colcon build
+
 source install/setup.bash
 ```
 
@@ -200,13 +206,24 @@ export GO2_WHISPER_MODEL="small"
 ## 檔案結構
 
 ```
-go2_voice/
-├── go2_voice/
-│   ├── voice_cmd.py       # 主程式
-│   └── build_prompts.py  # 語音生成工具
-├── config/
-│   └── poses.yaml         # 導覽點姿態定義
-├── audio/                 # 預生成語音檔案
-└── launch/
-    └── voice.launch.py    # ROS2 啟動檔
+go2-hci/                          # colcon workspace 根目錄
+├── src/
+│   └── go2_voice/                # 語音互動（本專案主軸）
+│       ├── go2_voice/
+│       │   ├── voice_cmd.py      # 主程式
+│       │   └── build_prompts.py  # 語音生成工具
+│       ├── config/
+│       │   └── poses.yaml        # 導覽點姿態定義
+│       ├── audio/                # 預生成語音 mp3
+│       ├── launch/
+│       │   └── voice.launch.py   # ROS2 啟動檔
+│       ├── resource/             # ament package 資源標記
+│       ├── test/                 # flake8 / copyright / pep257
+│       ├── package.xml
+│       ├── setup.py
+│       └── setup.cfg
+├── README.md
+└── AGENTS.md                     # 個人 agent 指示（不入 git）
 ```
+
+> `build/`、`install/`、`log/` 由 `colcon build` 自動生成，不入版控。

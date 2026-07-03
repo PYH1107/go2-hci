@@ -1,11 +1,11 @@
-# Go2 語音控制 - 快速開始
+# Go2 语音控制 - 快速开始
 
-## 系統概述
+## 系统概述
 
-**Input**: 你的聲音 → **Output**: Go2 執行動作
+**Input**: 你的声音 → **Output**: Go2 执行动作
 
 ```
-聲音 → Whisper → 文本 → 意圖解析 → SDK/Nav2 → 動作
+声音 → Whisper → 文本 → 意图解析 → SDK/Nav2 → 动作
 ```
 
 ## ref.
@@ -14,39 +14,39 @@
 - [ROS2理论与实践_宇树机器人Go2开发指南](https://www.bilibili.com/video/BV1vv5YzBEQH?spm_id_from=333.788.videopod.episodes&vd_source=cb1e076f51948a7c55b8e7d36bc8063d)
 
 > [!NOTE]
-> 上述資料表示 go2 不支援語音 topic，而得採用外接的麥克風設備
+> 上述资料表示 go2 不支持语音 topic，而得采用外接的麦克风设备
 
 ---
 
-## 語音指令列表
+## 语音指令列表
 
 
-### 原地動作（SDK 直接控制）
+### 原地动作（SDK 直接控制）
 
-### 導覽點（Nav2）
+### 导览点（Nav2）
 | 指令 | action_id |
 |------|----------|
-| 去院史館 / 院史館 | `nav_history_museum` |
-| 去資料室 / 資料室 | `nav_archive_room` |
-| 去保密學院 / 保密學院 | `nav_school_of_classified` |
-| 去人機交互實驗室 / 人機交互 | `nav_hci_lab` |
+| 去院史馆 / 院史馆 | `nav_history_museum` |
+| 去资料室 / 资料室 | `nav_archive_room` |
+| 去保密学院 / 保密学院 | `nav_school_of_classified` |
+| 去人机交互实验室 / 人机交互 | `nav_hci_lab` |
 
 ---
 
-## Nav2 導航設置
+## Nav2 导航设置
 
-### 1. 資料格式：poses.yaml
+### 1. 资料格式：poses.yaml
 
-導覽點姿態定義在 `config/poses.yaml`：
+导览点姿态定义在 `config/poses.yaml`：
 
 ```yaml
-# 格式：action_id (必須與 COMMAND_MAP 中的對應)
+# 格式：action_id (必须与 COMMAND_MAP 中的对应)
 nav_history_museum:
-  frame: "map"                    # 參考坐標系
+  frame: "map"                    # 参考坐标系
   position:
-    x: 5.2                       # X 坐標（公尺）
-    y: 3.1                       # Y 坐標（公尺）
-    z: 0.0                       # Z 坐標（公尺）
+    x: 5.2                       # X 坐标（公尺）
+    y: 3.1                       # Y 坐标（公尺）
+    z: 0.0                       # Z 坐标（公尺）
   orientation:
     x: 0.0                       # Quaternion X
     y: 0.0                       # Quaternion Y
@@ -66,23 +66,23 @@ nav_archive_room:
     w: 0.0
 ```
 
-**坐標獲取方式**：
+**坐标获取方式**：
 - 使用 `ros2 run nav2_simple_commander basic_navigator` 或
-- 使用 RViz2 的「2D Pose Estimate」工具記錄目標位置
-- 或從地圖文件直接讀取已知坐標
+- 使用 RViz2 的「2D Pose Estimate」工具记录目标位置
+- 或从地图文件直接读取已知坐标
 
 ---
 
-### 2. 語音關鍵字映射
+### 2. 语音关键字映射
 
-導覽點的語音關鍵字定義在 `voice_cmd.py` 的 `COMMAND_MAP`：
+导览点的语音关键字定义在 `voice_cmd.py` 的 `COMMAND_MAP`：
 
 ```python
-# 在 voice_cmd.py 中定義
+# 在 voice_cmd.py 中定义
 COMMAND_MAP = [
     # ... 其他指令 ...
-    (["去院史館", "院史館"], "nav_history_museum", "去院史館"),
-    (["去資料室", "資料室"], "nav_archive_room", "去資料室"),
+    (["去院史馆", "院史馆"], "nav_history_museum", "去院史馆"),
+    (["去资料室", "资料室"], "nav_archive_room", "去资料室"),
     # ...
 ]
 ```
@@ -91,20 +91,20 @@ COMMAND_MAP = [
 
 ### 3. Nav2 接收方式
 
-語音系統發布 `geometry_msgs/PoseStamped` 到 `/goal_pose` topic：
+语音系统发布 `geometry_msgs/PoseStamped` 到 `/goal_pose` topic：
 
 ```bash
-# 監聽導航目標
+# 监听导航目标
 ros2 topic echo /goal_pose
 ```
 
-**Nav2 需要配置**：創建一個簡單的 goal subscriber 或使用 Nav2 的 Navigation2 API。
+**Nav2 需要配置**：创建一个简单的 goal subscriber 或使用 Nav2 的 Navigation2 API。
 
 ---
 
-## 添加新的導覽點
+## 添加新的导览点
 
-### 步驟 1：在 poses.yaml 添加姿態
+### 步骤 1：在 poses.yaml 添加姿态
 
 ```yaml
 nav_new_location:
@@ -120,16 +120,16 @@ nav_new_location:
     w: 1.0
 ```
 
-### 步驟 2：在 voice_cmd.py 添加關鍵字
+### 步骤 2：在 voice_cmd.py 添加关键字
 
 ```python
 COMMAND_MAP = [
     # ...
-    (["去新地點", "新地點"], "nav_new_location", "去新地點"),
+    (["去新地点", "新地点"], "nav_new_location", "去新地点"),
 ]
 ```
 
-### 步驟 3：重新編譯
+### 步骤 3：重新编译
 
 ```bash
 colcon build --packages-select go2_voice
@@ -138,70 +138,70 @@ source install/setup.bash
 
 ---
 
-## 安裝與運行
+## 安装与运行
 
-### 依賴安裝
+### 依赖安装
 
 ```bash
-# Python 依賴
+# Python 依赖
 pip install faster-whisper edge-tts numpy pyyaml
 
-# ROS2 依賴
+# ROS2 依赖
 sudo apt install ros-humble-nav2-msgs
 ```
 
-### 編譯
+### 编译
 
 ```bash
 cd ~/go2-hci
 
-# 只編譯語音包（最快）
+# 只编译语音包（最快）
 colcon build --packages-select go2_voice
 
-# 或一次編譯全部（含 base 驅動、橋接等 6 個套件）
+# 或一次编译全部（含 base 驱动、桥接等 6 个套件）
 colcon build
 
 source install/setup.bash
 ```
 
-### 運行
+### 运行
 
 ```bash
-# 終端 1：啟動語音控制
+# 终端 1：启动语音控制
 ros2 run go2_voice voice_cmd
 
-# 終端 2：監聽導航目標（可選）
+# 终端 2：监听导航目标（可选）
 ros2 topic echo /goal_pose
 ```
 
 ---
 
-## 環境變量
+## 环境变量
 
 ```bash
-# 網卡介面（默認 enp3s0）
+# 网卡接口（默认 enp3s0）
 export GO2_NET_IFACE="enp3s0"
 
-# Whisper 模型（默認 small）
+# Whisper 模型（默认 small）
 export GO2_WHISPER_MODEL="small"
 ```
 ---
 
-## 檔案結構
+## 文件结构
 
 ```
-go2-hci/                          # colcon workspace 根目錄
+go2-hci/                          # colcon workspace 根目录
 ├── src/
-│   └── go2_voice/                # 語音互動（本專案主軸）
+│   └── go2_voice/                # 语音互动（本项目主线）
 │       ├── go2_voice/
-│       │   ├── voice_cmd.py      # 主程式
-│       │   └── build_prompts.py  # 語音生成工具
+│       │   ├── voice_cmd.py      # 主程序
+│       │   └── build_prompts.py  # 语音生成工具
 │       ├── config/
-│       │   └── poses.yaml        # 導覽點姿態定義
-│       ├── audio/                # 預生成語音 mp3
+│       │   └── poses.yaml        # 导览点姿态定义
+│       ├── audio/                # 预生成语音 mp3
 │       ├── launch/
-│       │   └── voice.launch.py   # ROS2 啟動檔
-│       ├── resource/             # ament package 資源標記
+│       │   └── voice.launch.py   # ROS2 启动文件
+│       ├── resource/             # ament package 资源标记
 │       ├── test/                 # flake8 / copyright / pep257
 │       ├── package.xml
 │       ├── setup.py
